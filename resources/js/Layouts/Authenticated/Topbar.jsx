@@ -1,6 +1,7 @@
+import { Link } from "@inertiajs/react";
 import { useState, useRef } from "react";
 
-export default function Topbar() {
+export default function Topbar({ name }) {
     const [dropdownOpen, setDropDownOpen] = useState(true);
     const dropDownTarget = useRef();
 
@@ -23,7 +24,7 @@ export default function Topbar() {
             />
             <div className="flex items-center gap-4">
                 <span className="text-black text-sm font-medium">
-                    Welcome, Granola Sky
+                    Welcome, {name}
                 </span>
 
                 <div className="collapsible-dropdown flex flex-col gap-2 relative cursor-pointer">
@@ -41,24 +42,28 @@ export default function Topbar() {
                         className="bg-white rounded-2xl text-black font-medium flex-col gap-1 absolute z-[999] right-0 top-[80px] min-w-[180px] hidden overflow-hidden"
                         ref={dropDownTarget}
                     >
-                        <a
+                        <Link
+                            as="button"
                             href="#!"
                             className="transition-all hover:bg-sky-100 p-4"
                         >
                             Dashboard
-                        </a>
-                        <a
+                        </Link>
+                        <Link
+                            as="button"
                             href="#!"
                             className="transition-all hover:bg-sky-100 p-4"
                         >
                             Settings
-                        </a>
-                        <a
-                            href="sign_in.html"
+                        </Link>
+                        <Link
+                            href={route("logout")}
+                            method="post"
                             className="transition-all hover:bg-sky-100 p-4"
+                            as="button"
                         >
                             Sign Out
-                        </a>
+                        </Link>
                     </div>
                 </div>
             </div>
