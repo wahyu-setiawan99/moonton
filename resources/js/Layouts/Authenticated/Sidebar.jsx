@@ -1,6 +1,7 @@
 import { Link } from "@inertiajs/react";
+import { SubscriptionDetail } from "./SubscriptionDetail";
 
-export default function Sidebar() {
+export default function Sidebar({ user }) {
     return (
         <aside className="fixed z-50 w-[300px] h-full">
             <div className="flex flex-col p-[30px] pr-0 border-r border-gray-[#F1F1F1] overflow-y-auto h-full">
@@ -85,7 +86,9 @@ export default function Sidebar() {
                     <div>
                         <div className="text-gray-1 side-link mb-4">Others</div>
                         <Link
-                            href={route("user.dashboard.subscriptionPlan.index")}
+                            href={route(
+                                "user.dashboard.subscriptionPlan.index"
+                            )}
                             className="side-link"
                         >
                             <svg
@@ -154,20 +157,16 @@ export default function Sidebar() {
                         </a>
                     </div>
 
-                    <div className="mt-auto pr-[30px]">
-                        <div className="p-5 bg-black rounded-[25px]">
-                            <img src="/icons/ic_star-rounded.svg" alt="" />
-                            <div className="text-white text-lg font-semibold mt-4 mb-8">
-                                For Greatest
-                            </div>
-                            <div className="text-white text-sm mb-2">
-                                12 of 30 hari
-                            </div>
-                            <div className="rounded-full w-full h-[6px] bg-[#333333]">
-                                <div className="rounded-full h-full w-9/12 bg-alerange"></div>
-                            </div>
-                        </div>
-                    </div>
+                    {user.activePlan && (
+                        <SubscriptionDetail
+                            name={user.activePlan.name}
+                            isPremium={user.activePlan.name === "Premium"}
+                            remaniningActiveDays={
+                                user.activePlan.remainingActiveDays
+                            }
+                            activeDays={user.activePlan.activeDays}
+                        />
+                    )}
                 </div>
             </div>
         </aside>

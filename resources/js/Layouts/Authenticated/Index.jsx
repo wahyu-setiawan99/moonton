@@ -6,7 +6,7 @@ export default function Authenticated({ user, children }) {
         <>
             <div className="mx-auto max-w-screen hidden lg:block">
                 {/* START: sidebar */}
-                <Sidebar />
+                <Sidebar user={user} />
                 {/* END: sidebar */}
 
                 {/* START: content */}
